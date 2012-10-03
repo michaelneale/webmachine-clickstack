@@ -16,6 +16,7 @@ EOF
 
 # start must be executable
 chmod 755 "$control_dir/start"
+chmod 755 "$app_dir/start.sh"
 
 # compile the app
 cd $app_dir
