@@ -1,0 +1,22 @@
+# -*-shell-script-*-
+
+# Install everything from pkg_dir
+cp -a $pkg_dir/* $app_dir/
+
+
+# Create a start script that runs Python's SimpleHTTPServer (this will
+# serve the directory contents over HTTP on $app_port)
+
+cat > "$control_dir/start" << EOF
+#!/bin/sh
+cd $app_dir
+export WEBMACHINE_PORT=$app_port
+exec ./start.sh
+EOF
+
+# start must be executable
+chmod 755 "$control_dir/start"
+
+# compile the app
+cd $app_dir
+make
