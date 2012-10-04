@@ -20,4 +20,5 @@ chmod 755 "$app_dir/start.sh"
 
 # compile the app
 cd $app_dir
+rm $app_dir/ebin/*.beam
 make
