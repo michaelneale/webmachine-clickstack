@@ -18,7 +18,8 @@ EOF
 chmod 755 "$control_dir/start"
 chmod 755 "$app_dir/start.sh"
 
-# compile the app
+# compile the app, removing any existing beam files
 cd $app_dir
 rm $app_dir/ebin/*.beam
+find $app_dir/deps/ -type f -name *.beam | xargs rm
 make
