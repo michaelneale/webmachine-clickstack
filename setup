@@ -11,7 +11,7 @@ cat > "$control_dir/start" << EOF
 #!/bin/sh
 cd $app_dir
 export WEBMACHINE_PORT=$app_port
-. $app_dir/.genapp/control/env
+export $(cat $app_dir/.genapp/control/env)
 exec ./start.sh
 EOF
 
