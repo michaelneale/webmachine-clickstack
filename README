@@ -1,1 +1,17 @@
-Not ready. WIP.
+This is designed to work with webmachine - https://github.com/basho/webmachine
+
+To run webmachine on cloudbees: 
+ - create your own webmachine project - as per quick start on https://github.com/basho/webmachine
+ - run the following in the project directory
+   (and maybe write some code!)
+
+    make
+    zip -r ../app.zip *
+    bees app:deploy -t webmachine ../app.zip
+
+That will use this here clickstack. (you don't need to clone what is here)
+
+Notes: 
+
+this patches the supervisor and the start script for the 
+webmachine generated project.    
