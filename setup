@@ -19,8 +19,24 @@ EOF
 chmod 755 "$control_dir/start"
 chmod 755 "$app_dir/start.sh"
 
-# compile the app, removing any existing beam files
 cd $app_dir
+
+## patch up webmachine 
+
+# remove reloader for deployment
+$plugin_dir/replace.erl $app_dir/start.sh "reloader -s" " "
+
+SUP_SRC_FILE=$app_dir/$(ls $app_dir/src/*_sup.erl)
+
+# now add in port
+$plugin_dir/replace.erl $SUP_SRC_FILE "{port, 8000}" "os:getenv(\"WEBMACHINE_PORT\")"
+
+# change to not use code:priv_dir    
+PRIV="filename:join(filename:dirname(filename:dirname(code:which(App))), \"priv\")"
+./replace.erl $SUP_SRC_FILE "code:priv_dir(App)" $PRIV
+
+# compile the app, removing any existing beam files
+
 rm $app_dir/ebin/*.beam
 find $app_dir/deps/ -type f -name *.beam | xargs rm
 make
