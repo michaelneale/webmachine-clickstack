@@ -4,9 +4,7 @@
 cp -a $pkg_dir/* $app_dir/
 
 
-# Create a start script that runs Python's SimpleHTTPServer (this will
-# serve the directory contents over HTTP on $app_port)
-
+# write the start control file:
 cat > "$control_dir/start" << EOF
 #!/bin/sh
 cd $app_dir
