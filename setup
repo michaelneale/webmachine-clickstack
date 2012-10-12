@@ -26,4 +26,6 @@ escript $plugin_dir/patch_webmachine.erl
 find $app_dir/deps/ -type f -name *.beam | xargs rm
 find $app_dir/ebin/ -type f -name *.beam | xargs rm
 
+chmod -R g+w $app_dir
+
 make
